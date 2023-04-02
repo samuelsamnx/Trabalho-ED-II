@@ -1,0 +1,712 @@
+<!DOCTYPE HTML>
+<html lang="pt-br">
+	<head>
+		<title>Árvore Rubro-Negra</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/style.css" />
+	</head>
+	<body class="is-preload">
+
+		<!-- sidebar-->
+			<section id="sidebar">
+				<div class="inner">	
+					<nav>
+						<ul>
+							<li><a href="#arvorern">Árvore Rubro-Negra</a></li>
+							<li><a href="#intro">Introdução</a></li>
+							<li><a href="#propriedade">Propriedades</a></li>
+							<li><a href="#insercao">Operações de Inserção</a></li>
+							<li><a href="#remocao">Operações de Remoção</a></li>
+							<li><a href="#alturano">Operações de Altura do Nó</a></li>
+							<li><a href="#leftrigth">Algoritmos LEFT-ROTATE a RIGTH-ROTATE</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!--Árvore Rubro-Negra-->
+			<div id="wrapper">
+					<section id="arvorern" class="wrapper style1 fullscreen fade-up">
+						<div class="inner">
+							<h1>Árvore Rubro-Negra</h1>
+							<p style="font-size: 25px; margin-top: -25px;">Propriedades e aplicações desse algoritimo de árvore binária usada na estruturação de dados.</p>
+							<ul class="actions">
+								<li><a href="#intro" class="button scrolly">Vamos lá!</a></li>
+							</ul>
+	
+						</div>
+					</section>
+
+				<!-- Introdução -->
+					<section id="intro" class="wrapper style2 spotlights">
+						<section>
+							<img src="C:\Documentos\Desktop\Trabalho ED II\images\imagemintroducao.png" alt="introducao" data-position="center center" />
+							<div class="content">
+								<div class="inner">
+									<h2>Introdução</h2>
+									<p>Árvore rubro-negra é um tipo de árvore binária de busca balanceada , uma estrutura de dados
+										usada em ciência da computação, tipicamente para implementar vetores associativos. A
+										estrutura original foi inventada em 1972, por Rudolf Bayer que a chamou de "Árvore Binárias B
+										Simétricas", mas adquiriu este nome moderno em um artigo de 1978 escrito por Leonidas
+										Guibas e Robert Sedgewick. Ela é complexa, mas tem um bom pior-caso de tempo de execução
+										para suas operações e é eficiente na prática: pode-se buscar, inserir, e remover em tempo O(log
+										n), onde n é o número total de elementos da árvore. De maneira simplificada, uma árvore
+										rubro-negra é uma árvore de busca binária que insere e remove de forma inteligente, para
+										assegurar que a árvore permaneça aproximadamente balanceada.</p>
+									<ul class="actions">
+										<!--<li><a href="generic.html" class="button">Learn more</a></li>-->
+									</ul>
+								</div>
+							</div>
+						</section>
+
+						<!--Propriedades-->
+						<section id="propriedade" class="wrapper style2 spotlights">
+							<img src="C:\Documentos\Desktop\Trabalho ED II\images\imagempropriedades.png" alt="propriedades" data-position="center center" />
+							<div class="content">
+								<div class="inner">
+									<h2>Propriedades</h2>
+									<ul>
+										<li>Todo nó da árvore é sempre vermelho ou preto</li>
+										<li>A raiz é sempre preto</li>
+									   	<li>Se um nó é vermelho, então os seus filhos são  pretos (ou seja, não existem nós vermelhos consecutivos)</li>
+									   	<li>Para cada nó, todos os caminhos desse nó para os nós folhas descendentes contém o mesmo número de nós pretos</li>
+									   	<li>Todo nó folha (NULL) é preto</li>
+										<li>Como todo nó folha termina com dois ponteiros para NULL, eles podem ser ignorados na representação da árvore para fins de didática</li>
+										<li>Permitindo rebalanceamento local apenas a parte afetada pela inserção ou remoção é rebalanceada</li>
+										<li>Uso de rotações e ajuste de cores na etapa de rebalanceamento</li>
+										<li>Essas operações corrigem as propriedades que foram violadas</li>
+										<li>A árvore rubro-negra busca manter-se como uma “árvore binária quase completa”</li>
+									</ul>
+									
+									
+								</div>
+							</div>
+						</section>
+							
+					</section>
+
+				<!--operaçao insercao-->
+					<section id="insercao" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Operações de Inserção</h2>
+							<p>Inserir um no em uma arvore rubro negra funciona do mesmo modo que em uma binaria alem de inserir o no aplicaremos tambem uma cor a ele.
+								Este código implementa a inserção de um nó em uma árvore binária de busca (BST). A função insert é pública e toma dois argumentos, uma chave (key) e um valor (value), que representam o novo nó que será inserido na árvore. A função chama a função privada bstInsert para realizar a inserção.
+A função bstInsert é privada e toma três argumentos, um nó (node) que representa a raiz da subárvore atual, uma chave (key) e um valor (value). Se o nó atual for nulo, a função cria um novo nó com a chave e o valor fornecidos e retorna esse nó.
+Se o nó atual não for nulo, a função compara a chave fornecida com a chave do nó atual. Se a chave fornecida for menor que a chave do nó atual, a função chama recursivamente bstInsert no filho esquerdo do nó atual, atualizando o ponteiro esquerdo do nó atual com o retorno da chamada recursiva.
+Se a chave fornecida for maior que a chave do nó atual, a função chama recursivamente bstInsert no filho direito do nó atual, atualizando o ponteiro direito do nó atual com o retorno da chamada recursiva.
+Se a chave fornecida for igual à chave do nó atual, a função atualiza o valor do nó atual com o valor fornecido.
+A função retorna o nó atualizado.
+Esse código insere um novo nó em uma árvore binária de busca, mantendo a propriedade de ordenação da árvore (todos os nós na subárvore esquerda têm chaves menores que a chave do nó atual, e todos os nós na subárvore direita têm chaves maiores que a chave do nó atual).
+								
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+<b>Implementação de uma inserção em Python</b>
+def insert(self, key, value):
+newNode = Node(key, value)
+self.root = self._bstInsert(self.root, newNode)
+self._fixInsertion(self.root, newNode)
+
+def _bstInsert(self, node, newNode):
+if node is None:
+	return newNode
+elif newNode.key < node.key:
+	node.leftChild = self._bstInsert(node.leftChild, newNode)
+	node.leftChild.parent = node
+else:
+	node.rightChild = self._bstInsert(node.rightChild, newNode)
+	node.rightChild.parent = node
+return node
+
+def _fixInsertion(self, node, insertedNode):
+# Caso 1: nó é a raiz da árvore
+if insertedNode.parent is None:
+	insertedNode.color = "BLACK"
+	self.root = insertedNode
+	return
+
+# Caso 2: o pai do nó inserido é preto, então não há violação das regras
+if insertedNode.parent.color == "BLACK":
+	return
+
+# Caso 3: o pai do nó inserido é vermelho e o tio do nó é vermelho
+if self._getUncle(insertedNode).color == "RED":
+	insertedNode.parent.color = "BLACK"
+	self._getUncle(insertedNode).color = "BLACK"
+	self._getGrandparent(insertedNode).color = "RED"
+	self._fixInsertion(node, self._getGrandparent(insertedNode))
+	return
+
+# Caso 4: o pai do nó inserido é vermelho e o tio do nó é preto
+grandparent = self._getGrandparent(insertedNode)
+if insertedNode == insertedNode.parent.rightChild and insertedNode.parent == grandparent.leftChild:
+	self._rotateLeft(insertedNode.parent)
+	insertedNode = insertedNode.leftChild
+elif insertedNode == insertedNode.parent.leftChild and insertedNode.parent == grandparent.rightChild:
+	self._rotateRight(insertedNode.parent)
+	insertedNode = insertedNode.rightChild
+
+# Caso 5: o pai do nó inserido é vermelho e o tio do nó é preto
+grandparent = self._getGrandparent(insertedNode)
+insertedNode.parent.color = "BLACK"
+grandparent.color = "RED"
+if insertedNode == insertedNode.parent.leftChild:
+	self._rotateRight(grandparent)
+else:
+	self._rotateLeft(grandparent)
+</code></pre>
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+<b>Implementação de uma inserção em JAVA</b>
+public void insert(int key, String value) {
+	root = bstInsert(root, key, value);
+}
+
+private Node bstInsert(Node node, int key, String value) {
+	if (node == null) {
+		return new Node(key, value);
+	}
+
+	if (key < node.key) {
+		node.left = bstInsert(node.left, key, value);
+	} else if (key > node.key) {
+		node.right = bstInsert(node.right, key, value);
+	} else {
+		node.value = value;
+	}
+
+	return node;
+}
+}
+public void insert(int key, String value) {
+	root = bstInsert(root, key, value);
+}
+
+private Node bstInsert(Node node, int key, String value) {
+if (node == null) {
+		return new Node(key, value);
+	}
+
+	if (key < node.key) {
+		node.left = bstInsert(node.left, key, value);
+	} else if (key > node.key) {
+
+
+		node.right = bstInsert(node.right, key, value);
+	} else {
+		node.value = value;
+	}
+
+	return node;
+}
+}
+</code></pre>
+							</p>
+							<div class="features">
+								
+							</div>
+						</div>
+					</section>
+
+					<!--operaçao remocao-->
+					<section id="remocao" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Operações de Remoção</h2>
+							<p>A remoção em uma árvore rubro-negra segue algumas regras para garantir que a árvore continue sendo balanceada e mantenha as propriedades da árvore rubro-negra. Aqui estão os passos para remover um nó em uma árvore rubro-negra:
+							
+								<ul>
+									<li>Encontre o nó a ser removido.</li>						
+									<li>Se o nó tiver dois filhos, encontre o sucessor do nó (o nó com o menor valor maior que o nó a ser removido) e substitua o nó a ser removido pelo sucessor.</li>							
+									<li>Se o nó removido for preto, pode ser necessário ajustar a árvore para manter as propriedades da árvore rubro-negra. Existem três casos diferentes:</li>						
+									<li>Se o nó removido for vermelho, a árvore permanecerá balanceada, então não há necessidade de ajustar a árvore.</li>								
+									<!--<span class="icon solid major fa-code"></span>-->				
+									<li>Verifique se as propriedades da árvore rubro-negra ainda são mantidas após a remoção. Essas propriedades incluem:<br>
+								<ul class="listabc" style="list-style-type: lower-alpha;">								
+									<li style="padding-left: 0;" value="1">a) Todo nó é vermelho ou preto.</li>
+									<li style="padding-left: 0;" value="2">b) A raiz é preta.</li>
+									<li style="padding-left: 0;" value="3"> Todo nó folha (nó sem filhos) é preto.</li>
+									<li style="padding-left: 0;" value="4">Se um nó é vermelho, seus filhos são pretos.</li>
+									<li style="padding-left: 0;" value="5">Para cada nó, todos os caminhos da raiz aos nós folha contêm o mesmo número de nós pretos.</li>
+								</ul>	
+								</ul>
+							
+							
+							
+					
+									
+													
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+<b>Implementação de uma remoção em Python</b>
+def remove_node(self, value):
+node = self.search_node(value)
+if not node:
+	return False
+
+if node.left_child and node.right_child:
+	successor = node.right_child
+	while successor.left_child:
+		successor = successor.left_child
+	node.value = successor.value
+	node = successor
+
+if not node.left_child and not node.right_child:
+	if node.color == "BLACK":
+		self.fix_double_black(node)
+	if node.parent:
+		if node.parent.left_child == node:
+			node.parent.left_child = None
+		else:
+			node.parent.right_child = None
+	else:
+		self.root = None
+	del node
+	return True
+
+if node.left_child or node.right_child:
+	if node.left_child:
+		child = node.left_child
+	else:
+		child = node.right_child
+	if node.color == "BLACK":
+		if child.color == "RED":
+			child.color = "BLACK"
+		else:
+			self.fix_double_black(node)
+	if node.parent:
+		if node.parent.left_child == node:
+			node.parent.left_child = child
+		else:
+			node.parent.right_child = child
+		child.parent = node.parent
+	else:
+		self.root = child
+		self.root.parent = None
+	del node
+	return True
+</code></pre>
+
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+<b>Implementação de uma remoção em JAVA</b>
+public class RedBlackTree {
+	// Estrutura de nó da árvore rubro-negra
+	private static class Node {
+		int key;
+		boolean isRed;
+		Node left;
+		Node right;
+		Node parent;
+
+		Node(int key) {
+			this.key = key;
+			this.isRed = true;
+		}
+	}
+
+	// Função para remover um nó
+	public static Node remove(Node root, int key) {
+		// Busca o nó a ser removido
+		Node node = search(root, key);
+		if (node == null) {
+			return root;
+		}
+
+		// Caso 1: O nó a ser removido não tem filhos
+		if (node.left == null && node.right == null) {
+			if (node == root) {
+				return null;
+			}
+			if (!node.isRed) {
+				root = deleteFixup(node, root);
+			}
+			if (node == node.parent.left) {
+				node.parent.left = null;
+			} else {
+				node.parent.right = null;
+			}
+			return root;
+		}
+
+		// Caso 2: O nó a ser removido tem apenas um filho
+		if (node.left == null || node.right == null) {
+			Node child;
+			if (node.left == null) {
+				child = node.right;
+			} else {
+				child = node.left;
+			}
+			if (node == root) {
+				child.isRed = false;
+				return child;
+			}
+			if (!node.isRed) {
+				root = deleteFixup(node, root);
+			}
+			if (node == node.parent.left) {
+				node.parent.left = child;
+			} else {
+				node.parent.right = child;
+			}
+			child.parent = node.parent;
+			return root;
+		}
+
+		// Caso 3: O nó a ser removido tem dois filhos
+		Node successor = successor(node);
+		node.key = successor.key;
+		root = remove(successor, successor.key);
+		return root;
+	}
+
+	// Função para corrigir a propriedade de duplo preto após a remoção
+	private static Node deleteFixup(Node node, Node root) {
+		while (node != root && !node.isRed) {
+			if (node == node.parent.left) {
+				Node sibling = node.parent.right;
+				if (sibling.isRed) {
+					sibling.isRed = false;
+					node.parent.isRed = true;
+					root = leftRotate(node.parent, root);
+					sibling = node.parent.right;
+				}
+				if (!sibling.left.isRed && !sibling.right.isRed) {
+					sibling.isRed = true;
+					node = node.parent;
+				} else {
+					if (!sibling.right.isRed) {
+						sibling.left.isRed = false;
+						sibling.isRed = true;
+						root = rightRotate(sibling, root);
+						sibling = node.parent.right;
+					}
+					sibling.isRed = node.parent.isRed;
+					node.parent.isRed = false;
+					sibling.right.isRed = false;
+					root = leftRotate(node.parent, root);
+					node = root;
+				}
+			} else {
+				Node sibling = node.parent.left;
+				if (sibling.isRed) {
+					sibling.isRed = false;
+					node.parent.isRed = true;
+					root = rightRotate(node.parent, root);
+					sibling = node.parent.left;
+				}
+				if (!sibling.left.isRed && !sibling.right.isRed) {
+						sibling.isRed = true;
+				node = node.parent;
+			} else {
+				if (!sibling.left.isRed) {
+					sibling.right.isRed = false;
+					sibling.isRed = true;
+					root = leftRotate(sibling, root);
+					sibling = node.parent.left;
+				}
+				sibling.isRed = node.parent.isRed;
+				node.parent.isRed = false;
+				sibling.left.isRed = false;
+				root = rightRotate(node.parent, root);
+				node = root;
+			}
+		}
+	}
+	node.isRed = false;
+	return root;
+}
+
+// Função para buscar um nó na árvore
+private static Node search(Node root, int key) {
+	while (root != null) {
+		if (key < root.key) {
+			root = root.left;
+		} else if (key > root.key) {
+			root = root.right;
+		} else {
+			return root;
+		}
+	}
+	return null;
+}
+
+// Função para encontrar o sucessor de um nó
+private static Node successor(Node node) {
+	if (node.right != null) {
+		node = node.right;
+		while (node.left != null) {
+			node = node.left;
+		}
+		return node;
+	} else {
+		Node parent = node.parent;
+		while (parent != null && node == parent.right) {
+			node = parent;
+			parent = node.parent;
+		}
+		return parent;
+	}
+}
+
+// Função para realizar uma rotação à esquerda
+private static Node leftRotate(Node node, Node root) {
+	Node child = node.right;
+	node.right = child.left;
+	if (child.left != null) {
+		child.left.parent = node;
+	}
+	child.parent = node.parent;
+	if (node.parent == null) {
+		root = child;
+	} else if (node == node.parent.left) {
+		node.parent.left = child;
+	} else {
+		node.parent.right = child;
+	}
+	child.left = node;
+	node.parent = child;
+	return root;
+}
+
+// Função para realizar uma rotação à direita
+private static Node rightRotate(Node node, Node root) {
+	Node child = node.left;
+	node.left = child.right;
+	if (child.right != null) {
+		child.right.parent = node;
+	}
+	child.parent = node.parent;
+	if (node.parent == null) {
+		root = child;
+	} else if (node == node.parent.right) {
+		node.parent.right = child;
+	} else {
+		node.parent.left = child;
+	}
+	child.right = node;
+	node.parent = child;
+	return root;
+}	
+	</code></pre>	
+	</p>
+	<div class="features">
+								
+	</div>
+	</div>
+
+					</section>
+							
+					
+
+					<!--operaçao altura do no-->
+					<section id="alturano" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Operações de Altura do Nó</h2>
+							<p>A altura de um nó nas árvores rubro-negras é calculada através da quantidade de nós pretos
+								que o caminho entre o nó e sua folha descendente possui, como por invariante os caminhos
+								traçados a partir de um nó até suas folhas descendentes devem possuir a mesma quantidade de
+								nós pretos, esses serão sua altura.
+								Para calcular-se a altura de um nó, existem duas formas possíveis:
+							
+							<ul>
+								<li> Calcular a quantidade de nós pretos a partir do nó escolhido até suas folhas
+									descendentes, incluindo o nó escolhido (caso seja preto) e excluindo os nós NIL.</li>
+								<li>Calcular a quantidade de nós pretos a partir do nó escolhido até suas folhas
+									descendentes, excluindo o nó escolhido, no entanto, contando o nó NIL.
+									</li>
+							</ul>
+
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+<b>JAVA</b>
+public int blackHeightRecursive(Node no) {
+	int altura = 0;
+	if (!node.isEmpty()) {
+	if (no.getColour() == Colour.BLACK) {
+	altura = 1 +
+	Math.max(blackHeightRecursive(no.getLeft()),
+	blackHeightRecursive(no.getRight()));
+	} else {
+	altura =
+	Math.max(blackHeightRecursive(no.getLeft()),
+	blackHeightRecursive(no.getRight()));
+	}
+	}
+	return altura;
+	}
+</code></pre>
+
+</p>
+<p><b>Altura de um nó será sempre a maior altura preta possível</b></p>
+<p>A cada vez que uma operação é realizada na árvore, testa-se este conjunto de propriedades e
+	são efetuadas rotações e ajuste de cores até que a árvore satisfaça todas estas regras.
+	Uma rotação é uma operação realizada na árvore para garantir seu balanceamento. A rotação
+	na árvore rubro-negra pode ser feita à direita e à esquerda, onde são alterados os ponteiros dos
+	nós rotacionados.
+	Ao inserir-se um elemento em uma árvore rubro-negra, esta é comparada com os elementos e
+	alocada em sua posição conforme a regra 2. Ao inserir-se um elemento ele é sempre da cor
+	vermelha (exceto se for o nó raiz). A seguir a árvore analisa o antecessor da folha. Se este for
+	vermelho será necessário alterar as cores para garantir a regra 4
+	O rótulo N será usado para denotar no novo nó sendo inserido. P denotará o pai de N',
+	enquanto que G será o avô (grandparent) de N', e U (uncle) será o tio do nó N'. Note-se que
+	entre em alguns casos, os papéis e os rótulos dos nós são trocadas, mas em cada caso, cada
+	etiqueta continua a representar o mesmo nó que representava no início do caso. Qualquer cor
+	exibida no diagrama ou é assumida no seu caso ou implícita por essas hipóteses.
+
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+<b>PYTHON</b>
+# 'no' refere-se ao nó-pai, neste caso
+	def arvore_binaria_buscar(no, valor):
+		if no is None:
+# valor não encontrado
+			return None
+		else:
+		if valor == no.valor:
+# valor encontrado
+			return no.valor
+		elif valor < no.valor:
+# busca na subárvore esquerda
+			return arvore_binaria_buscar(no.filho_esquerdo, valor)
+		elif valor > no.valor:
+# busca na subárvore direita
+			return arvore_binaria_buscar(no.filho_direito, valor)
+</code></pre>
+</p>
+							<div class="features"></div>
+						</div>
+
+
+						<!--Opera. left ritgh rotate-->
+					<section id="leftrigth" class="wrapper style3 fade-up">
+						<div class="inner">
+							<h2>Operações LEFT e RIGTH-ROTATE</h2>
+							<p><b>Para fazer uma rotação à esquerda em uma árvore rubro-negra, siga os seguintes passos:</p></b>
+								1 - Identificar o nó que precisa ser rotacionado. Em uma rotação à esquerda, o nó que precisará ser rotacionado é o filho direito do nó atual.<br>
+								2 - Armazene o nó à direita do nó atual em uma variável temporária, pois ele se tornará o novo nó atual após a rotação.<br>
+								3 - Se o nó atual tiver um pai, verifique se o nó atual é um filho à esquerda ou à direita do pai e ajuste o filho apropriado do pai para o novo nó atual.<br>
+								4 - Atribua o pai do nó atual como pai do novo nó atual.<br>
+								5 - Atribua o novo nó atual como o filho esquerdo do nó atual.<br>
+								6- Atribua o filho esquerdo do novo nó atual como o filho direito do nó atual.<br>
+								7 - Atualize as cores dos nós, se necessário, para garantir que a árvore continue a cumprir as regras da árvore rubro-negra.<br>
+								8 - Retorne o novo nó atual como resultado da rotação. <b>Olhe esse exemplo em Python:</b>
+<pre><code style="font-weight: bold; color:aliceblue">
+<span class="icon solid major fa-code"></span>
+def rotate_left(node):
+# Armazena o nó à direita do nó atual
+new_node = node.right
+
+# Ajusta o filho apropriado do pai do nó atual
+if node.parent:
+	if node.parent.left == node:
+		node.parent.left = new_node
+	else:
+		node.parent.right = new_node
+
+# Atribui o pai do nó atual como pai do novo nó atual
+new_node.parent = node.parent
+
+# Atribui o novo nó atual como o filho esquerdo do nó atual
+node.right = new_node.left
+if node.right:
+	node.right.parent = node
+new_node.left = node
+node.parent = new_node
+# Atualiza as cores dos nós, se necessário
+if new_node.color == 'red':
+	new_node.color = 'black'
+	node.color = 'red'
+	return new_node
+</code></pre>
+								</p>
+								<p><b>Para fazer uma rotação à direita em uma árvore rubro-negra, siga os seguintes passos:</b></p> 
+									1 - Identificar o nó que precisará ser rotacionado. Na rotação à direita, o nó que precisa ser rotacionado é o filho esquerdo do nó atual.<br>
+									2 - Armazene o nó à esquerda do nó atual em uma variável temporária, pois ele se tornará o novo nó atual após a rotação.<br>
+									3 - Se o nó atual tiver um pai, verifique se o nó atual é um filho à esquerda ou à direita do pai e ajuste o filho apropriado do pai para o novo nó atual.<br>
+									4 - Atribue-se o pai do nó atual como pai do novo nó atual.<br>
+									5 - Atribua o novo nó atual como o filho direito do nó atual.<br>
+									6 - Atribua o filho direito do novo nó atual como o filho esquerdo do nó atual.<br>
+									7 - Atualize as cores dos nós, se necessário, para garantir que a árvore continue a cumprir as regras da árvore rubro-negra.<br>
+									8 - Retorne o novo nó atual como resultado da rotação. <b>Olhe esse exemplo em Python:</b><br>									
+<pre><code style="font-weight: bold; color:aliceblue">
+	<span class="icon solid major fa-code"></span>
+def rotate_right(node):
+# Armazena o nó à esquerda do nó atual
+new_node = node.left
+
+# Ajusta o filho apropriado do pai do nó atual
+if node.parent:
+	if node.parent.left == node:
+		node.parent.left = new_node
+	else:
+		node.parent.right = new_node
+
+# Atribui o pai do nó atual como pai do novo nó atual
+new_node.parent = node.parent
+
+# Atribui o novo nó atual como o filho direito do nó atual
+node.left = new_node.right
+if node.left:
+	node.left.parent = node
+		new_node.right = node
+		node.parent = new_node
+
+# Atualiza as cores dos nós, se necessário
+if new_node.color == 'red':
+	new_node.color = 'black'
+	node.color = 'red'
+
+return new_node
+</code></pre>																	
+									</p>
+							<div class="features"></div>
+
+						</div>
+					</section>
+
+
+
+
+				<!-- grupo -->
+					<section id="" class="wrapper style1 fade-up">
+						<div class="inner">
+							<h2>Refêrencias</h2>
+							<p><a href="https://stackoverflow.com/">stackoverflow.com</a><br>
+								<a href="https://github.com/">github.com</a><br>
+								<a href="https://pt.wikipedia.org/">pt.wikipedia.org</a><br>
+								<a href="https://www.ime.usp.br/">www.ime.usp.br</a><br>
+								<a href="https://www.facom.ufu.br/">www.facom.ufu.br</a><br>
+								<a href="https://www.ulysseso.com/">www.ulysseso.com</a><br>
+								<a href="https://youtube.com.br/">youtube.com.br</a><br>		
+								<a href="https://chat.openai.com/chat">chat.openai.com/chat</a>
+							</p>
+							
+						</div>
+					</section>
+					
+
+			</div>
+	
+
+		<!-- rodape -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Grupo 1 N1 - Estrutura de Dados II</li><li>Instituto Federal Do Tocantins - IFTO</li><li>Tecnologia Em Análise e Desenvolvimento de Sistemas</li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- js -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
